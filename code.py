@@ -674,29 +674,32 @@ def train_xgboost(X_train, y_train):
 def train_svm(X_train, y_train):
     """Train a Support Vector Machine classifier"""
     print("\n=== Training SVM Classifier ===")
-    
+
+    # Convert y_train to numpy array if it's a pandas Series
+    if isinstance(y_train, pd.Series):
+        y_train = y_train.values
+
     # Use a subset of data for SVM due to computational complexity
     sample_size = min(10000, X_train.shape[0])
     indices = np.random.choice(X_train.shape[0], sample_size, replace=False)
     X_train_sample = X_train[indices]
     y_train_sample = y_train[indices]
-    
+
     print(f"Using {sample_size} samples for SVM training")
-    
+
     svm = SVC(kernel='rbf', probability=True, random_state=42, verbose=True)
     print(f"SVM parameters: {svm.get_params()}")
     print("Fitting SVM model (this may take some time)...")
-    
+
     start_time = datetime.now()
     svm.fit(X_train_sample, y_train_sample)
     training_time = datetime.now() - start_time
-    
+
     print(f"SVM training completed in {training_time}")
-    
+
     # Save the model
     joblib.dump(svm, os.path.join(MODELS_DIR, "svm.pkl"))
     print(f"SVM model saved to {os.path.join(MODELS_DIR, 'svm.pkl')}")
-    
     return svm
 
 # %%
@@ -924,6 +927,12 @@ def train_neural_network(X_train, y_train, X_test, y_test, input_size, batch_siz
     """Train a neural network for malware detection"""
     print("\n=== Training Neural Network ===")
     
+    # Convert pandas Series to numpy arrays if needed
+    if isinstance(y_train, pd.Series):
+        y_train = y_train.values
+    if isinstance(y_test, pd.Series):
+        y_test = y_test.values
+    
     # Convert numpy arrays to PyTorch tensors
     X_train_tensor = torch.FloatTensor(X_train)
     y_train_tensor = torch.FloatTensor(y_train.reshape(-1, 1))
@@ -1075,7 +1084,7 @@ def train_neural_network(X_train, y_train, X_test, y_test, input_size, batch_siz
     plt.savefig(os.path.join(FIGURES_DIR, 'neural_network_training_curves.png'))
     plt.show()
     
-    return model, (train_losses, val_losses, train_accs, val_accs)
+    return model, (train_losses, val_losses, train_accs, val_accs)
 
 # %%
 def evaluate_neural_network(model, X_test, y_test):
