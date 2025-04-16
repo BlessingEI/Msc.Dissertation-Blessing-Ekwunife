@@ -1,0 +1,234 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A template for Master's Thesis
+% Systems Security Group
+% Coventry University
+% 2025
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,oneside]{book}
+
+%% ======================================================================
+%% Document geometry and layout
+%% ======================================================================
+\usepackage[margin=1.2in]{geometry}  % Page margins
+\usepackage{fancyhdr}                % Custom headers and footers
+\usepackage{setspace}                % Line spacing control
+\usepackage{microtype}               % Typography improvements (character protrusion, font expansion)
+
+%% ======================================================================
+%% Document structure packages
+%% ======================================================================
+\usepackage[toc,page]{appendix}      % Improved appendix handling
+\usepackage{pdfpages}                % Include PDF documents
+\usepackage{enumitem}                % Customizable lists
+\usepackage{lipsum}                  % Dummy text generator
+
+%% ======================================================================
+%% Graphics and color packages
+%% ======================================================================
+\usepackage{graphicx}                % Enhanced graphics support
+\graphicspath{{./images/}{./figures/}}
+\usepackage{xcolor}                  % Extended color support
+\usepackage{float}                   % Improved figure positioning
+% \usepackage{subfig}                  % Subfigures within figures
+\usepackage{placeins}                % Control float placement
+\usepackage{wrapfig}                % Wrap text around figures
+\usepackage{lscape}                  % Landscape orientation for pages
+
+%% ======================================================================
+%% Mathematical typesetting
+%% ======================================================================
+\usepackage{amsmath, amssymb, amsfonts, amsthm}  % AMS mathematics packages
+\usepackage{siunitx}                 % SI units formatting
+\usepackage{tikz}                    % Drawing diagrams
+\usepackage{pgfplots}                % Plotting functions and data
+\usepackage{tikz-cd}                 % Commutative diagrams
+\usetikzlibrary{arrows,shapes,positioning,calc,patterns,decorations.pathmorphing,decorations.markings}
+\pgfplotsset{compat=newest}
+
+%% ======================================================================
+%% Table packages
+%% ======================================================================
+\usepackage{booktabs}                % Professional tables
+\usepackage{longtable}               % Tables spanning multiple pages
+\usepackage{multirow}                % Multiple row cells
+\usepackage{tabularx}                % Flexible table columns
+
+%% ======================================================================
+%% Bibliography and references
+%% ======================================================================
+\usepackage{natbib}  % Bibliography style
+
+%% ======================================================================
+%% Algorithms and code listings
+%% ======================================================================
+\usepackage{algorithm2e}             % Algorithms
+\usepackage{listings}                % Code listings
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  commentstyle=\color{green!60!black},
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt
+}
+
+%% ======================================================================
+%% Hyperlinks - load this last to avoid conflicts
+%% ======================================================================
+\usepackage[colorlinks=true, 
+            linkcolor=blue, 
+            citecolor=blue, 
+            urlcolor=blue,
+            bookmarks=true,
+            bookmarksopen=true]{hyperref}
+
+%% ======================================================================
+%% Captions and references
+%% ======================================================================
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{cleveref}                % Intelligent cross-referencing
+
+
+\begin{document}
+
+\captionsetup[figure]{margin=1.5cm,font=small,labelfont={bf},name={Figure},labelsep=colon,textfont={it}}
+\captionsetup[table]{margin=1.5cm,font=small,labelfont={bf},name={Table},labelsep=colon,textfont={it}}
+\SetLipsumDefault{1}
+
+\frontmatter
+
+\begin{titlepage}
+
+
+% -------------------------------------------------------------------
+% You need to edit the details here
+% -------------------------------------------------------------------
+
+\begin{center}
+{\LARGE Coventry University}\\[0.25cm]
+{\Large Faculty of Engineering, Environment and Computing
+School of Computing, Electronics and Mathematics 
+}\\[1.5cm]
+\linespread{1.2}\huge {\bfseries Leveraging Machine Learning for Network Malware Detection}\\[1cm]
+\linespread{1}
+\includegraphics[width=6.5cm]{culogo.JPG}\\[1.5cm]
+{\Large\bf Ekwunife Blessing Ifunanya  }\\[0.25cm]
+{\large \emph{Student ID:} 15116185}\\[0.25cm]
+{\large \emph{Supervisor:} Dr. Kabiru Mohammed}\\[1cm] % if applicable
+\vspace{\fill}
+\large Submitted in partial fulfillment of the University's requirements\\ for the degree of Master of Science in cybersecurity\\[0.5cm]
+\large Academic Year: 2024/25
+\end{center}
+
+\end{titlepage}
+
+
+% -------------------------------------------------------------------
+% Declaration
+% -------------------------------------------------------------------
+
+\newpage
+\section*{Declaration of Originality}
+
+I declare that this project is all my own work and has not been copied in part or in whole from any other source except where duly acknowledged. As such, all use of previously published work (from books, journals, magazines, internet etc.) has been acknowledged by citation within the main report to an item in the References or Bibliography lists. I also agree that an electronic copy of this project may be stored and used for the purposes of plagiarism prevention and detection.
+
+\bigskip
+
+\section*{Statement of copyright}
+I acknowledge that the copyright of this project report, and any product developed as part of the project, belong to Coventry University. Support, including funding, is available to commercialise products and services developed by staff and students. Any revenue that is generated is split with the inventor/s of the product or service. For further information please see \href{https://www.coventry.ac.uk/ipr}{www.coventry.ac.uk/ipr} or contact 
+\href{mailto:ipr@coventry.ac.uk}{ipr@coventry.ac.uk}.
+
+\bigskip
+
+\section*{Statement of ethical engagement}
+I declare that a proposal for this project has been submitted to the Coventry University ethics monitoring website (\href{https://ethics.coventry.ac.uk/}{https://ethics.coventry.ac.uk/}) and that the application number is listed below (Note: Projects without an ethical application number will be rejected for marking)
+
+\bigskip
+% \includegraphics[width=1.5cm]{output.png}
+\noindent Name: Ekwunife Blessing Ifunanya\\[1mm]
+\rule[1em]{25em}{0.5pt}
+
+\noindent Signature: EBI\\[1mm]
+\rule[1em]{25em}{0.5pt}
+
+\noindent Date: 13/04/2025\\[1mm]
+\rule[1em]{25em}{0.5pt}
+
+\noindent Student ID: 15116185\\[1mm]
+\rule[1em]{25em}{0.5pt}
+
+\noindent Ethics Application Number: P184895\\[1mm]
+\rule[1em]{25em}{0.5pt}
+
+\noindent 1st Supervisor Name: Dr. Kabiru Mohammed\\[1mm]
+\rule[1em]{25em}{0.5pt}
+
+\noindent 2nd Supervisor Name: Dr. Antal Goldschmidt\\[1mm]
+\rule[1em]{25em}{0.5pt}
+
+% \includepdf[pages=-]{forms/form.pdf}
+
+\input{sections/0_i_ack.tex}
+\newpage
+
+% -------------------------------------------------------------------
+% Abstract
+% -------------------------------------------------------------------
+
+\input{sections/0_ii_abstract.tex}
+
+% -------------------------------------------------------------------
+% Contents, list of figures, list of tables
+% -------------------------------------------------------------------
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+
+% -------------------------------------------------------------------
+% Main sections (as required)
+% -------------------------------------------------------------------
+
+\mainmatter
+
+\input{sections/1_introduction.tex}
+\input{sections/2_background.tex}
+\input{sections/3_methodology.tex}
+\input{sections/4_results.tex}
+% \input{sections/5_discussion.tex}
+\input{sections/6_project_management.tex}
+\input{sections/7_critical_appraisal.tex}
+\input{sections/8_conclusion.tex}
+
+% -------------------------------------------------------------------
+% Bibliography
+% -------------------------------------------------------------------
+
+\renewcommand{\bibname}{References}
+
+\bibliographystyle{apalike}
+\bibliography{main} 
+
+% -------------------------------------------------------------------
+% Appendices
+% -------------------------------------------------------------------
+\appendix
+\input{sections/appendixA.tex}
+% \input{sections/appendixB.tex}
+\input{sections/appendixC.tex}
+
+% \begin{appendices}
+%   \input{sections/appendixA.tex}
+%   \input{sections/appendixC.tex}
+% \end{appendices}
+
+
+project github repo link: \href{https://github.com/BlessingEI/Msc.Dissertation-Blessing-Ekwunife}{https://github.com/BlessingEI/Msc.Dissertation-Blessing-Ekwunife} 
+
+\end{document}

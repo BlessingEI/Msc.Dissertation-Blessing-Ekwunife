@@ -1,0 +1,59 @@
+\chapter{Conclusions}
+
+This research project has investigated the application of machine learning techniques to detect malware in IoT network traffic. Throughout this dissertation, I have demonstrated a systematic approach to addressing cybersecurity challenges in IoT environments through the analysis of network flow characteristics. The project has integrated technical implementation with methodological rigour and critical reflection, yielding insights that contribute to both academic knowledge and practical security applications.
+
+\section{Research Journey and Key Insights}
+
+This 13-week project began with a clearly defined research question focused on the viability of machine learning for malware detection in IoT environments. The research process evolved through multiple phases, from exploratory data analysis and feature engineering to model implementation and evaluation. This methodical progression allowed for incremental learning and refinement, which ultimately led to robust and meaningful outcomes.
+
+The technical implementation leveraged the CTU-IoT-Malware dataset containing more than one million network connections, extracting actionable intelligence through careful pre-processing and feature engineering. The most significant insight that connection state patterns, particularly failed connection attempts (S0 states), serve as strong indicators of malicious activity emerged through systematic analysis rather than assumptions based on existing literature. This finding aligns with the theoretical understanding of attack methodologies, but provides empirical validation that strengthens the foundation for detection approaches.
+
+The research journey incorporated careful risk management strategies and quality assurance processes, reflecting a professional approach to project execution. From a methodological perspective, the initial data exploration phase proved crucial in identifying the dataset's characteristics and limitations, allowing for appropriate scoping of research objectives and interpretation of results. The iterative approach to model development, with three distinct algorithms compared under consistent evaluation criteria, provided confidence in the validity of the findings despite the dataset's constraints.
+
+\section{Project Impact and Significance}
+
+This project offers technical contributions and broader implications for cybersecurity. Technically, the optimised Random Forest model achieved 99.96\% precision and 100\% recall, setting a benchmark for the detection of network-based IoT malware. Identifying key discriminative features, such as connection states, protocol usage, and traffic volume, provides actionable information to security practitioners.
+
+Methodologically, the research demonstrated the effectiveness of combining domain knowledge with data-driven feature engineering for robust detection models. The rigorous multi-model comparison and hyperparameter optimisation serve as a methodological example for other cybersecurity research. The documented workflow provides a template for similar projects.
+
+The systematic literature review synthesised findings across network security, machine learning, and IoT security, identifying research patterns and gaps, thus bridging previously separate research communities.
+
+Beyond technical findings, the project has educational value. Managing the complete research lifecycle developed transferable skills in research methodology, critical thinking, and project management applicable to future endeavours.
+
+Specifically, the findings address IoT security challenges, particularly resource constraints. Demonstrating effective detection using only network flow characteristics offers a viable approach for practical IoT deployments, compatible with encrypted traffic and limited computational power.
+
+\section{Reflections on Limitations and Learning}
+
+As detailed in the Critical Assessment chapter, this research has inherent limitations that warrant acknowledgement. The predominance of port scanning activities in the dataset (99.9\% of malicious traffic) restricts the generalisability of the findings to other types of attacks. The 5-day data collection period may not capture longer-term patterns, and the specific network environment may not represent the diversity of real-world IoT deployments.
+
+However, these limitations provided valuable learning opportunities. The experience of working with an imperfect dataset mirrors real-world challenges in cybersecurity research, where ideal data is rarely available. The project demonstrated the importance of acknowledging constraints while still extracting meaningful insights from available data. This ability to work effectively within practical limitations represents a key professional skill developed through this research.
+
+The Project Management chapter highlighted how risk identification and mitigation strategies were crucial to project success. Early recognition of the limitations of the dataset allowed for appropriate scope adjustment and interpretation of the results. Similarly, computational resource constraints necessitated efficient code implementation and strategic hyperparameter optimisation approaches, developing valuable skills in resource management.
+
+\section{Limitations of the Study}
+
+Although this research demonstrates promising results for the application of machine learning to malware detection, it is important to acknowledge several limitations inherent in the study design and dataset.
+
+Firstly, the dataset used presents certain constraints. It was predominantly characterised by port scanning activities, which comprised 99.9\% of the identified malicious traffic. Consequently, the representation of other attack vectors, such as data exfiltration or command-and-control communication, was limited. This skewness potentially restricts the generalisability of our findings to the broader spectrum of malware behaviours. Furthermore, the data collection period lasted approximately five days. This relatively short time frame might not adequately capture longer-term trends, cyclical patterns, or seasonal variations in network traffic and associated malicious activities. Finally, the data originate from a specific network environment. The characteristics of this environment, including the types of IoT devices and network configuration, may not be fully representative of all potential IoT deployments, potentially limiting the applicability of the results to different contexts.
+
+Secondly, certain methodological limitations should be considered. Although the feature engineering and selection process identified features that were highly effective for classification within this dataset, an exhaustive exploration of all possible combinations, transformations, or advanced feature extraction techniques was not undertaken. It remains possible that alternative feature sets could yield further improvements in detection performance. Furthermore, while the computational speed of the trained models was assessed, a comprehensive optimisation for deployment on severely resource-constrained platforms, such as edge computing devices, was beyond the scope of this work.
+
+Third, concerns regarding the broader generalisability of the findings warrant discussion. The landscape of cyber threats is dynamic, and attackers continuously evolve their techniques. Consequently, the specific traffic patterns identified as malicious in this study may decrease in effectiveness as indicators over time. The increasing prevalence of encrypted communication protocols also poses a challenge, potentially reducing the visibility afforded by network flow analysis in the future. Moreover, while the methodology demonstrates potential, its efficacy might vary when applied to different network architectures, industry sectors, or diverse populations of IoT devices.
+
+These limitations highlight pertinent avenues for future research. Subsequent investigations could benefit from incorporating datasets with a greater diversity of attack types, evaluating the long-term robustness of the detection models, and assessing their performance across a wider range of network environments and against sophisticated adversarial evasion techniques.
+
+\section{Future Research Directions}
+
+Although specific recommendations for future research were detailed in previous chapters, this project has illuminated several promising directions for both technical advancement and professional development.
+
+\begin{itemize}
+    \item \textbf{Technical Advancements:} Future work should expand beyond port scanning detection to address various types of attacks, including data exfiltration and command-and-control communications. The integration of sequential pattern mining, graph-based features, and adversarial resilience training represents logical next steps to build on this foundation.
+    
+    \item \textbf{Process Improvements:} The project management experience revealed opportunities to improve research efficiency through more automated feature exploration and systematic hyperparameter optimisation. Future projects would benefit from incorporating these process improvements from the outset.
+    
+    \item \textbf{Educational Development:} The interdisciplinary nature of this work, spanning cybersecurity, machine learning, and data analysis, highlights the value of developing expertise across domains. Continued professional development in these intersecting fields would enhance future research capabilities.
+\end{itemize}
+
+In conclusion, this research project has successfully demonstrated the viability of machine learning approaches for malware detection in IoT network traffic. Beyond the specific technical findings, the project has reinforced the importance of methodological rigour, critical reflection, and effective project management to conduct meaningful research. The experience has not only contributed to knowledge in the cybersecurity domain, but has also developed transferable skills applicable to future academic and professional endeavours.
+
+By addressing a significant challenge in contemporary cybersecurity, protecting resource-constrained IoT environments from malicious activities, this project makes a meaningful contribution to more secure and resilient connected systems. As IoT deployments continue to expand across sectors, the approaches developed in this research offer practical pathways to enhance security while acknowledging the unique constraints of these environments.

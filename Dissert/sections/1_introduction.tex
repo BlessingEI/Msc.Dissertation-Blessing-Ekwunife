@@ -1,0 +1,54 @@
+\chapter{Introduction}
+
+\section{Background and Motivation}
+
+The rapid proliferation of devices on the Internet of Things (IoT) has fundamentally transformed modern network infrastructures, creating unprecedented security challenges for organisations and individuals alike. With the projected number of connected IoT devices exceeding 30 billion by 2025 \citep{Cisco2020}, and the global market value approaching £1.2 trillion by 2027 \citep{IoTAnalytics2021}, these technologies have become integral to critical infrastructure, industrial systems, healthcare and consumer applications. Although IoT technologies deliver significant benefits in automation, efficiency, and data-driven decision making, they simultaneously introduce substantial cybersecurity vulnerabilities that traditional protection mechanisms struggle to address.
+
+IoT environments present unique security concerns that differentiate them from conventional information technology infrastructures. These challenges arise from several interconnected factors: the heterogeneous nature of IoT ecosystems, comprising devices with vastly different hardware capabilities, operating systems, and communication protocols; the widespread deployment of resource-constrained devices with limited processing power, memory, and energy capacity; minimal built-in security controls due to cost considerations and manufacturing priorities; and an exponentially expanded attack surface created by the large number of network-connected devices \citep{Bertino2017, Neshenko2019}.
+
+The threat landscape targeting IoT ecosystems has evolved with alarming sophistication. The Mirai botnet attack in 2016 demonstrated the devastating potential of malware aimed at the Internet of Things, compromising more than 600,000 vulnerable devices to launch unprecedented distributed denial of service attacks against critical internet infrastructure \citep{Antonakakis2017}. This watershed event fundamentally altered perceptions of IoT security, revealing systemic vulnerabilities that continue to be exploited. More recent threats such as Mozi, Dark Nexus, and Torii have significantly expanded the arsenal of IoT-specific malware, targeting an ever-wider range of devices and leveraging increasingly advanced persistence and propagation mechanisms \citep{Kambourakis2021, Mehrban2021}.
+
+Conventional security approaches based on signature-based detection, static rule sets, and perimeter defences have been found to be woefully inadequate to protect IoT environments \citep{Nguyen2019}. These methods rely on identifying known attack patterns rather than detecting novel threats and struggle to adapt to the polymorphic nature of modern malware. Furthermore, the resource limitations of many IoT devices preclude the deployment of conventional endpoint protection solutions, such as antivirus software or host-based intrusion detection systems. This reality requires the development of network-based monitoring approaches capable of identifying malicious activity without imposing a computational burden on the devices themselves \citep{Diro2018}.
+
+Machine learning presents a promising paradigm for addressing these challenges, offering the potential for more adaptive and scalable detection capabilities that can operate effectively in dynamic IoT environments \citep{Buczak2016}. By recognising patterns in network traffic that indicate malicious activity, machine learning models can identify both known threats and potential zero-day attacks that evade signature-based systems. Recent research has demonstrated encouraging results using various algorithms including Random Forest, Support Vector Machines, and deep learning approaches for network intrusion detection in IoT contexts \citep{Aldweesh2020, Diro2021}.
+
+However, developing effective machine learning solutions for IoT security monitoring introduces distinct challenges. These include identifying the optimal set of network traffic features that balance discriminative power with computational efficiency; selecting appropriate algorithms that can operate effectively within the resource constraints of IoT environments; achieving acceptable detection accuracy while minimising false positives that could overwhelm security analysts; and ensuring model interpretability to enable meaningful response to detected threats \citep{Vinayakumar2019, baich2022machine, saran2023comparative}.
+
+In this research, I investigate the application of machine learning for network-based malware detection in IoT environments, with a particular focus on developing practical approaches that balance detection efficacy with operational viability. By analysing network traffic data from the CTU-IoT-Malware dataset, I aim to identify efficient feature sets and develop optimised models capable of distinguishing between benign and malicious communications across diverse attack vectors, whilst remaining suitable for deployment in resource-constrained monitoring environments.
+
+\section{Aims and Objectives}
+
+The primary aim of this research is to develop effective machine learning approaches for detecting malware in IoT network traffic that balance detection accuracy with computational efficiency for practical deployment in resource-constrained IoT environments.
+
+To achieve this aim, I have established the following specific objectives.
+
+\begin{enumerate}
+    \item Identify the features of network traffic that most effectively distinguish between benign and malicious communications in IoT environments through a comprehensive exploratory analysis.
+    
+    \item Develop and implement optimised feature selection methodologies that identify the minimal set of discriminative traffic attributes whilst minimising computational complexity.
+    
+    \item To design and evaluate machine learning models for classification and determine which machine learning algorithms (including Random Forest, Support Vector Machines, XGBoost, and deep learning approaches) provide the optimal balance between detection accuracy, false positive rates, and computational efficiency.
+    
+    \item Optimise the model parameters and architectures to enhance detection performance, ensuring their applicability in IoT monitoring environments. Evaluate the impact of various preprocessing, feature engineering, and dimensionality reduction methods on model performance. Assess model interpretability using feature importance and explainable AI techniques, offering actionable insights for security professionals.
+    
+\end{enumerate}
+
+Through achieving these objectives, my aim is to contribute practical security monitoring solutions that can enhance the protection of IoT systems against increasingly sophisticated threats while operating within the unique constraints of these environments.
+
+\section{Significance of the Research}
+
+This research addresses significant challenges in the cybersecurity domain, particularly in relation to IoT environments. The contributions of this work include the following:
+
+\begin{itemize}
+    \item By identifying the most effective features and models for network-based malware detection in IoT contexts, I provide practical guidance to security teams that implement monitoring solutions in resource-constrained environments.
+    
+    \item  Through systematic comparison and optimisation of different machine learning approaches, my work contributes to the growing body of knowledge on AI-driven security solutions tailored to IoT environments.
+    
+    \item The comprehensive exploratory analysis of the traffic characteristics of the IoT network offers valuable insights into both normal behaviour and attack patterns specific to these environments, improving our understanding of the threat landscapes of the IoT.
+    
+    \item By identifying the minimal set of traffic features needed for effective detection, I support the development of more efficient monitoring solutions suitable for deployment in environments with limited computational resources.
+    
+    \item By emphasising the importance of model interpretability alongside performance metrics, my research addresses a critical need for explainable AI in security contexts where understanding model decisions is essential for incident response.
+\end{itemize}
+
+As IoT adoption continues to accelerate across industries, the need for effective security monitoring becomes increasingly urgent. My research addresses this need through a systematic investigation of machine learning approaches that can enhance the protection of these critical systems while operating within their unique constraints.

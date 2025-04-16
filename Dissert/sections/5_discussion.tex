@@ -1,0 +1,96 @@
+\chapter{Discussion and Conclusion}
+
+The results of this research provide several important insights into the characteristics of malicious network traffic and the effectiveness of machine learning for its detection.
+
+Strong classification performance (exceeding 99\% accuracy with Random Forest) confirms that network flow characteristics alone, without requiring deep packet inspection, can provide sufficient information to detect malware traffic with high reliability. This finding carries significant practical implications for network security, particularly in environments where deep packet inspection is infeasible due to encryption or resource constraints.
+
+Our analysis revealed that connection state features were exceptionally powerful predictors of malicious activity. The overwhelming prevalence of S0 states (connection attempts without response) in malicious traffic suggests that failed connection attempts serve as a primary signature of reconnaissance activities. This observation aligns with common attack methodologies, in which adversaries scan large IP ranges to identify potential targets before launching more focused attacks.
+
+Protocol analysis demonstrated a clear preference for TCP in malicious communications (72.4\% of malicious connections compared to 40.9\% of benign connections). This indicates that attackers prefer TCP for scanning activities, probably because the handshake process provides more detailed response information than connectionless protocols such as UDP. The almost exclusive use of ICMP for benign traffic was also noteworthy, suggesting that legitimate network diagnostic traffic dominates this protocol in the observed environment.
+
+Temporal analysis revealed that malicious activities occurred in distinct patterns with periods of intensified activity rather than continuous probing. This suggests automated scanning tools operating in batches, possibly to avoid detection by volume-based alerting systems. The lack of a strong diurnal pattern in attack traffic contrasts with benign usage patterns, which exhibited more variation by time of day, reflecting human activity cycles.
+
+The clustering observed in the PCA visualisation confirms that benign and malicious traffic occupy distinct regions in the feature space, with limited overlap. This separation explains the high classification accuracy achieved by machine learning models and suggests that even relatively simple classification approaches can be effective for most of the malware traffic patterns observed in this dataset.
+
+\section{Machine Learning Model Performance Analysis}
+
+Our evaluation of multiple machine learning approaches revealed several insights regarding algorithmic performance for malware detection in IoT network traffic. The exceptional performance achieved by all models (exceeding 98.5\% accuracy) demonstrates that machine learning is highly effective for this particular security application when it is provided with appropriate features.
+
+\subsection{Algorithm Comparison}
+
+Among the base models, Random Forest consistently outperformed both XGBoost and SVM on all metrics. This superior performance can be attributed to several factors:
+
+\begin{itemize}
+    \item The random forest's ensemble nature provides robust performance across varied network traffic patterns without overfitting to specific attack signatures. The algorithm's inherent bagging approach combines multiple decision trees trained on different subsets of the data, resulting in improved generalisation.
+    
+    \item The algorithm naturally handles the mix of categorical and numerical features present in network traffic data without requiring extensive preprocessing. This is particularly beneficial for network traffic analysis, where features exist in various formats and scales.
+    
+    \item  The complexity of relationships between traffic features and maliciousness requires non-linear decision boundaries, which tree-based methods like Random Forest capture effectively. This allows the model to identify complex interaction patterns that might not be apparent with linear models.
+\end{itemize}
+
+Although XGBoost showed comparable performance to Random Forest (99.17\% versus 99.21\% accuracy), its implementation required more careful parameter tuning. SVM, despite achieving respectable results (98.73\% accuracy), demonstrated limitations in the efficient handling of the scale of our dataset, with substantially longer training times than tree-based methods.
+
+\subsection{Hyperparameter Optimisation Impact}
+
+The application of RandomizedSearchCV for hyperparameter optimisation yielded significant improvements in model performance. The optimised Random Forest achieved near-perfect classification with 99.96\% accuracy and, most critically for security applications, 100\% recall, which means it did not miss any malicious connections in our test set.
+
+The key optimisation improvements included:
+
+\begin{itemize}
+    \item \textbf{Tree structure adjustments}: Optimised tree depths and minimum sample split parameters allowed for more precise decision boundaries. By finding the optimal balance between shallow trees (which might underfit) and deep trees (which might overfit), the model achieved a superior generalisation.
+    
+    \item \textbf{Ensemble size}: Increasing the number of trees from the default improved model stability and classification confidence. Although individual trees might make errors, the ensemble's aggregate prediction reduced the variance and improved overall accuracy.
+    
+    \item \textbf{Feature sampling}: Modified feature sampling strategies improved the model's ability to utilise subtle signals in less prominent features. This helped the model identify malicious patterns that might be evident only in combinations of less obvious features.
+\end{itemize}
+
+The improvement was particularly notable in precision, which increased from 99.15\% to 99.92\%, indicating a substantial reduction in false positives. This aspect is critical for operational security systems, where false alarms can lead to fatigue of alerts and a diminished response to actual threats.
+
+\subsection{Feature Importance Insights}
+
+Analysis of the importance of features of the optimised Random Forest model provided valuable insight into the detection process. Connection state features consistently ranked as the most influential predictors, followed by protocol information and traffic volume metrics.
+
+Interestingly, while the temporal features individually showed moderate importance, their collective contribution was substantial. This suggests that malicious activity patterns manifest on multiple time-related dimensions that the model successfully integrated into its decision process.
+
+The high importance of derived features (such as bytes-per-packet ratios and logarithmic transformations of traffic volumes) validates our feature engineering approach. These transformations helped capture the distinctive characteristics of scanning activities, which typically involve minimal data transfer and specific packet-size patterns.
+
+\section{Implications for Malware Detection}
+
+The findings of this research have several practical implications for network security and malware detection in real-world deployments.
+
+\subsection{Feature Selection for Detection Systems}
+
+Our analysis identified specific features with high discriminative power for malware detection.
+
+\begin{itemize}
+    \item \textbf{Connection states}: The strong correlation between S0 states and malicious traffic suggests that connection state monitoring should be a primary component of detection systems. Simple rules that flag unusual patterns of failed connections could identify a large proportion of scanning activities. For example, a sudden increase in the ratio of failed to successful connections could trigger an alert for potential scanning activity.
+    
+    \item \textbf{Protocol ratios}: Sudden changes in the distribution of protocols used on a network could indicate the onset of malicious activity, particularly if TCP traffic increases sharply without corresponding increases in established connections. Monitoring the ratio of different protocols over time windows provides context that can distinguish between normal usage pattern shifts and potential attacks.
+    
+    \item \textbf{Bytes-to-packets ratio}: The distinct clustering of malicious traffic in the low-byte, low-packet region suggests that monitoring this ratio could help identify scanning activities, which typically involve minimal data transfer. Legitimate traffic usually exhibits higher data transfer per connection, making this ratio a valuable indicator of reconnaissance activities.
+\end{itemize}
+
+% \subsection{Deployment Considerations}
+
+% The high performance of machine learning models suggests several approaches for practical deployment.
+
+% \begin{itemize}
+%     \item \textbf{Real-time detection}: The computational efficiency of Random Forest models enables real-time classification even in resource-constrained environments. Our testing showed that a trained model could classify over 10,000 connections per second on modest hardware, making it suitable for inline deployment where traffic analysis occurs as packets flow through the network.
+    
+%     \item \textbf{Tiered detection}: A multi-stage approach could be effective, with simple rule-based systems handling obvious cases (e.g., excessive S0 connections) and machine learning models addressing more ambiguous traffic patterns. This would balance computational efficiency with detection accuracy, allocating more computational resources only to traffic that warrants deeper analysis.
+    
+%     \item \textbf{Adaptive thresholds}: The temporal patterns observed suggest that adaptive thresholds for alert generation could improve detection by accounting for normal variations in network activity throughout the day. For example, thresholds could automatically adjust based on historical traffic patterns for specific times of day, reducing false positives during periods of legitimately high network activity.
+% \end{itemize}
+
+\subsection{Beyond Port Scanning}
+
+Although our dataset was dominated by port scanning activities, the methodology demonstrates promise for detecting other types of malicious traffic:
+
+\begin{itemize}
+    \item \textbf{Feature engineering}: The approach of obtaining temporal features and traffic ratios could be extended to identify other types of attack, such as data exfiltration or command-and-control communications. For example, data exfiltration might be characterised by unusual outbound data volumes or timing patterns, which could be captured by similar feature engineering techniques.
+    
+    \item \textbf{Transfer learning}: Models trained on this dataset could provide a foundation for detecting other attack types through transfer learning, where the model is fine-tuned with smaller amounts of data representing different attack patterns. This approach takes advantage of the underlying patterns already learnt while adapting to new attack signatures with minimal additional training data.
+    
+    \item \textbf{Anomaly detection}: The clear separation between traffic classes suggests that anomaly detection approaches could complement classification methods, potentially identifying novel attack types that are not present in training data. By establishing a baseline of normal behaviour, deviations could be flagged for investigation even when they do not match known attack patterns.
+\end{itemize}
+
